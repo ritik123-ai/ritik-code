@@ -19,9 +19,9 @@ class EmployeePagination(PageNumberPagination):
 
         
 class EmployeeAPIView(APIView):
-    def get(self, request):
+    def get(self, request,pk):
         try:
-            employees = Employee.objects.all()
+            employees = Employee.objects.pk(pk=pk)
             paginator = EmployeePagination()
             paginated_employees = paginator.paginate_queryset(employees, request)
             serializer = EmployeeSerializer(paginated_employees, many=True)
